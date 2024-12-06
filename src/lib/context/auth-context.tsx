@@ -3,12 +3,12 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import api from '@/lib/api/axios';
+import { login as loginApi, logout as logoutApi } from '@/lib/api/auth';
 
 interface AuthContextType {
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -18,14 +18,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   useEffect(() => {
+    // Check if token exists
     const token = localStorage.getItem('token');
     setIsAuthenticated(!!token);
   }, []);
 
   const login = async (username: string, password: string) => {
     try {
-      const response = await api.post('/login', { username, password });
-      localStorage.setItem('token', response.data.token);
+      const response = await loginApi(username, password);
+      document.cookie = `token=${response.token}; path=/`;
+      localStorage.setItem('token', response.token);
       setIsAuthenticated(true);
       router.push('/admin/dashboard');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -34,10 +36,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
-    router.push('/admin/Login');
+  const logout = async () => {
+    try {
+      await logoutApi();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+      localStorage.removeItem('token');
+      setIsAuthenticated(false);
+      window.location.href = '/';
+    }
   };
 
   return (

@@ -1,3 +1,4 @@
+// src/app/(admin)/admin/login/page.tsx
 'use client';
 
 import { useState } from 'react';
@@ -16,14 +17,14 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const username = formData.get('username') as string;
-    const password = formData.get('password') as string;
-
     try {
-      await login(username, password);
+      const formData = new FormData(e.currentTarget);
+      await login(
+        formData.get('username') as string,
+        formData.get('password') as string
+      );
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (err) {
+    } catch (error) {
       setError('Invalid credentials');
     } finally {
       setLoading(false);
@@ -47,12 +48,10 @@ export default function LoginPage() {
               <label className="text-sm font-medium">Username</label>
               <Input name="username" required />
             </div>
-
             <div className="space-y-2">
               <label className="text-sm font-medium">Password</label>
               <Input type="password" name="password" required />
             </div>
-
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </Button>

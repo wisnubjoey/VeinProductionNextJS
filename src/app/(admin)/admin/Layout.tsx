@@ -1,18 +1,17 @@
-// src/app/(admin)/layout.tsx
+// src/app/(admin)/admin/layout.tsx
 'use client';
 
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/context/auth-context';
-import Sidebar from '@/components/admin/Sidebar';
-import AdminHeader from '@/components/admin/Header';
+import { Button } from '@/components/ui/button';
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -22,23 +21,19 @@ export default function AdminLayout({
     }
   }, [isAuthenticated, router, pathname]);
 
-  if (pathname === '/admin/Login') {
-    return children;
-  }
-
-  if (!isAuthenticated) {
+  if (!isAuthenticated && pathname !== '/admin/Login') {
     return null;
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Sidebar />
-      <AdminHeader />
-      <main className="pl-64 pt-16">
-        <div className="p-6">
-          {children}
-        </div>
-      </main>
+    <div>
+      <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
+        <h1 className="text-xl font-bold">Admin Dashboard</h1>
+        <Button onClick={logout} className="bg-red-500 hover:bg-red-600">
+          Logout
+        </Button>
+      </header>
+      {children}
     </div>
   );
 }
