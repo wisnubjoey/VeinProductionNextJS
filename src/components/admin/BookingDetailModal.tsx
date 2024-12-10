@@ -18,6 +18,8 @@ export default function BookingDetailModal({
 }: BookingDetailModalProps) {
   if (!booking) return null;
 
+  console.log('Booking data:', booking);
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl">

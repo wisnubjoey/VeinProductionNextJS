@@ -12,9 +12,8 @@ export default function Home() {
       <main>
         
         <HeroSection />
-        <PackagesSection />
         <FeaturedPortfolio />
-        <AboutSection />
+        <PackagesSection />
       </main>
       <Footer />
     </>

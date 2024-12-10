@@ -15,7 +15,7 @@ export interface Booking {
 }
 
 export async function getBookings() {
-  const response = await api.get<Booking[]>('/bookings');
+  const response = await api.get('/bookings');
   return response.data;
 }
 
@@ -23,3 +23,9 @@ export async function updateBookingStatus(id: number, status: string) {
   const response = await api.patch(`/bookings/${id}/status`, { status });
   return response.data;
 }
+
+export async function createBooking(booking: Booking) {
+  const response = await api.post('/bookings', booking);
+  return response.data;
+}
+

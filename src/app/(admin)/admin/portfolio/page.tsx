@@ -9,8 +9,6 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getPortfolioItems, deletePortfolioItem } from '@/lib/api/portfolio';
 import { PortfolioItem } from "@/types/portfolio";
 
-
-
 export default function PortfolioPage() {
   const queryClient = useQueryClient();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -23,6 +21,8 @@ export default function PortfolioPage() {
     queryFn: getPortfolioItems
   });
 
+  console.log('Portfolio data:', portfolioItems);
+
   // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: deletePortfolioItem,
@@ -33,8 +33,8 @@ export default function PortfolioPage() {
 
   // Filter items based on selected type
   const filteredItems = selectedType === 'all' 
-    ? portfolioItems 
-    : portfolioItems?.filter(item => item.type === selectedType);
+  ? portfolioItems?.data
+  : portfolioItems?.data?.filter(item => item.type === selectedType);
 
   if (isLoading) {
     return <div>Loading...</div>;

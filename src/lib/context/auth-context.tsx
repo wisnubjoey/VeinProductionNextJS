@@ -8,7 +8,7 @@ import { login as loginApi, logout as logoutApi } from '@/lib/api/auth';
 interface AuthContextType {
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<void>;
-  logout: () => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
