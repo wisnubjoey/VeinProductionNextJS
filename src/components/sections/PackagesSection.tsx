@@ -56,11 +56,11 @@ export default function PackagesSection() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
   return (
-    <section className="py-24 bg-purple-50">
+    <section className="py-24 bg-gradient-to-b from-amber-100 to-white">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl font-bold mb-4">Choose Your Package</h2>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-xl">
             Select the perfect package for your needs. All packages include high-resolution photos and videos.
           </p>
         </div>
@@ -70,12 +70,12 @@ export default function PackagesSection() {
             <Card 
               key={pkg.id} 
               className={`relative hover:shadow-xl transition-all duration-300 ${
-                pkg.popular ? 'border-purple-500 shadow-lg' : ''
+                pkg.popular ? 'border-amber-500 shadow-lg' : ''
               }`}
             >
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-purple-500 text-white px-4 py-1 rounded-full text-sm">
+                  <span className="bg-amber-500 text-white px-4 py-1 rounded-xl text-sm">
                     Most Popular
                   </span>
                 </div>
@@ -94,8 +94,8 @@ export default function PackagesSection() {
                 <ul className="space-y-3">
                   {pkg.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3">
-                      <div className="h-6 w-6 rounded-full bg-purple-100 flex items-center justify-center">
-                        <Check size={14} className="text-purple-500" />
+                      <div className="h-6 w-6 rounded-xl bg-amber-100 flex items-center justify-center">
+                        <Check size={14} className="text-amber-500" />
                       </div>
                       <span>{feature}</span>
                     </li>
@@ -105,7 +105,7 @@ export default function PackagesSection() {
                 <Button 
                   className={`w-full ${
                     pkg.popular 
-                      ? 'bg-purple-500 hover:bg-purple-600' 
+                      ? 'bg-amber-500 hover:bg-amber-600' 
                       : 'bg-gray-900 hover:bg-gray-800'
                   }`}
                   onClick={() => setSelectedPackage(pkg.id)}
@@ -119,7 +119,7 @@ export default function PackagesSection() {
 
         <div className="mt-12 text-center text-gray-600">
           <p>All packages include basic equipment setup and location scouting.</p>
-          <p>Need a custom package? <button className="text-purple-500 hover:underline">Contact us</button></p>
+          <p>Need a custom package? <button className="text-amber-500 hover:underline font-bold">Contact us</button></p>
         </div>
       </div>
 

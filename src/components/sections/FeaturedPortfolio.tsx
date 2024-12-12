@@ -2,8 +2,19 @@
 
 import { useRef, useState } from "react";
 import { MediaCard } from "@/components/ui/mediaCard";
+import Link from "next/link";
 
-const media = [
+type MediaType = "video" | "photo";
+
+interface MediaItem {
+  id: number;
+  title: string;
+  description: string;
+  mediaUrl: string;
+  type: MediaType;
+}
+
+const media: MediaItem[] = [
   {
     id: 1,
     title: "Amazing Video",
@@ -32,12 +43,12 @@ export default function FeaturedPortfolio() {
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement }>({});
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-purple-50">
+    <section className="py-24 bg-gradient-to-b from-white to-amber-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Featured Works</h2>
-          <p className="text-gray-600">
-            Explore our latest photography and videography projects
+          <h2 className="text-3xl font-bold mb-4">Hasil Photo dan Video</h2>
+          <p className="text-gray-600 text-xl">
+            Ingin melihat lebih banyak hasil photo dan video saya? <Link href="/portfolio"><span className="text-amber-500 font-bold hover:underline cursor-pointer">Gallery</span></Link>
           </p>
         </div>
 
