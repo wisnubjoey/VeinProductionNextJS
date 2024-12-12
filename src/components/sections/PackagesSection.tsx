@@ -6,6 +6,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import BookingModal from '@/components/booking/BookingModal';
+import { BackgroundLines } from '@/components/ui/background-lines';
+import Link from 'next/link';
 
 const packages = [
   {
@@ -56,11 +58,13 @@ export default function PackagesSection() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-amber-100 to-white">
-      <div className="max-w-7xl mx-auto px-6">
+    <BackgroundLines className="relative py-24">
+      <div className="relative max-w-7xl mx-auto px-6 z-10">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold mb-4">Choose Your Package</h2>
-          <p className="text-gray-600 text-xl">
+          <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-amber-500 text-transparent bg-clip-text">
+            Choose Your Package
+          </h2>
+          <p className="text-amber-200/80 text-xl">
             Select the perfect package for your needs. All packages include high-resolution photos and videos.
           </p>
         </div>
@@ -69,44 +73,44 @@ export default function PackagesSection() {
           {packages.map((pkg) => (
             <Card 
               key={pkg.id} 
-              className={`relative hover:shadow-xl transition-all duration-300 ${
-                pkg.popular ? 'border-amber-500 shadow-lg' : ''
+              className={`relative hover:shadow-xl transition-all duration-300 bg-black/40 backdrop-blur-sm border-amber-500/20 hover:border-amber-500/40 ${
+                pkg.popular ? 'border-amber-500 shadow-lg shadow-amber-500/10' : ''
               }`}
             >
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-amber-500 text-white px-4 py-1 rounded-xl text-sm">
+                  <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-black px-4 py-1 rounded-xl text-sm font-medium">
                     Most Popular
                   </span>
                 </div>
               )}
               
               <CardHeader>
-                <CardTitle className="text-2xl">{pkg.title}</CardTitle>
+                <CardTitle className="text-2xl text-amber-100">{pkg.title}</CardTitle>
                 <div className="mt-2">
-                  <span className="text-3xl font-bold">Rp {pkg.price}</span>
-                  <span className="text-gray-600">/session</span>
+                  <span className="text-3xl font-bold text-amber-400">Rp {pkg.price}</span>
+                  <span className="text-amber-200/60">/session</span>
                 </div>
-                <p className="text-gray-600 mt-2">{pkg.description}</p>
+                <p className="text-amber-200/80 mt-2">{pkg.description}</p>
               </CardHeader>
 
               <CardContent className="space-y-6">
                 <ul className="space-y-3">
                   {pkg.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3">
-                      <div className="h-6 w-6 rounded-xl bg-amber-100 flex items-center justify-center">
-                        <Check size={14} className="text-amber-500" />
+                      <div className="h-6 w-6 rounded-xl bg-amber-500/10 flex items-center justify-center">
+                        <Check size={14} className="text-amber-400" />
                       </div>
-                      <span>{feature}</span>
+                      <span className="text-amber-100">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Button 
-                  className={`w-full ${
+                  className={`w-full transition-all duration-300 ${
                     pkg.popular 
-                      ? 'bg-amber-500 hover:bg-amber-600' 
-                      : 'bg-gray-900 hover:bg-gray-800'
+                      ? 'bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black' 
+                      : 'bg-black border border-amber-500/20 hover:border-amber-500/40 text-amber-400 hover:bg-amber-500/10'
                   }`}
                   onClick={() => setSelectedPackage(pkg.id)}
                 >
@@ -117,9 +121,13 @@ export default function PackagesSection() {
           ))}
         </div>
 
-        <div className="mt-12 text-center text-gray-600">
+        <div className="mt-12 text-center text-amber-200/80">
           <p>All packages include basic equipment setup and location scouting.</p>
-          <p>Need a custom package? <button className="text-amber-500 hover:underline font-bold">Contact us</button></p>
+          <p>Need a custom package? {" "}
+            <Link href="/contact" className="text-amber-400 hover:text-amber-300 transition-colors font-bold border-b-2 border-amber-400/20 hover:border-amber-400">
+              Contact us
+            </Link>
+          </p>
         </div>
       </div>
 
@@ -128,6 +136,6 @@ export default function PackagesSection() {
         onClose={() => setSelectedPackage(null)}
         packageType={selectedPackage || ''}
       />
-    </section>
+    </BackgroundLines>
   );
 }

@@ -33,8 +33,8 @@ export function MediaCard({
         >
           <div
             className={cn(
-              "group cursor-pointer overflow-hidden relative card h-[450px] rounded-xl shadow-xl mx-auto flex flex-col justify-end p-6 border border-transparent hover:border-purple-500/50",
-              "transition-all duration-500"
+              "group cursor-pointer overflow-hidden relative card h-[450px] rounded-xl shadow-xl mx-auto flex flex-col justify-end p-6 border border-amber-500 hover:border-amber-300",
+              "transition-all duration-500 hover:shadow-xl hover:shadow-amber-500/40 hover:scale-100"
             )}
           >
             {type === 'video' ? (

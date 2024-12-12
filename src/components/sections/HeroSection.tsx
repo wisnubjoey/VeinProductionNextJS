@@ -32,21 +32,23 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <div className="min-h-screen pt-24 flex items-center bg-gradient-to-b from-amber-100 to-white">
+    <div className="min-h-screen pt-24 flex items-center bg-gradient-to-b from-black via-neutral-900 to-black">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="space-y-8">
-          <div className="inline-block px-4 py-2 bg-amber-200 rounded-full">
-            <span className="text-amber-600 font-medium">Premium Photography Services</span>
+          <div className="inline-block px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20">
+            <span className="text-amber-400 font-medium">Premium Photography Services</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-amber-100">
             Capture Your{" "}
-            <span className="text-amber-400">Special Moments</span>{" "}
+            <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-transparent bg-clip-text">
+              Special Moments
+            </span>{" "}
             Forever
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-lg">
+          <p className="text-xl text-amber-200/80 max-w-lg">
             Professional photography and videography services in Bali. 
             Let us help you create timeless memories with our expert team.
           </p>
@@ -55,7 +57,7 @@ export default function HeroSection() {
             <Link href="/booking">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto bg-amber-400 hover:bg-amber-500 text-lg px-8"
+                className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black text-lg px-8 transition-all duration-300"
               >
                 Book Now
               </Button>
@@ -63,7 +65,7 @@ export default function HeroSection() {
             <Link href="/portfolio">
               <Button 
                 size="lg" 
-                className="w-full sm:w-auto text-lg px-8 bg-white text-black hover:bg-amber-100"
+                className="w-full sm:w-auto text-lg px-8 bg-transparent border border-amber-500/20 text-amber-400 hover:bg-amber-500/10 hover:border-amber-500/40"
               >
                 View Portfolio
               </Button>
@@ -73,12 +75,12 @@ export default function HeroSection() {
           {/* Social Proof */}
           <div className="pt-8 flex items-center gap-8">
             <div>
-              <h4 className="text-3xl font-bold">100+</h4>
-              <p className="text-gray-600">Happy Clients</p>
+              <h4 className="text-3xl font-bold text-amber-100">100+</h4>
+              <p className="text-amber-200/80">Happy Clients</p>
             </div>
             <div>
-              <h4 className="text-3xl font-bold">5.0</h4>
-              <p className="text-gray-600">Rating</p>
+              <h4 className="text-3xl font-bold text-amber-100">5.0</h4>
+              <p className="text-amber-200/80">Rating</p>
             </div>
           </div>
         </div>
@@ -86,7 +88,7 @@ export default function HeroSection() {
         {/* Right Content */}
         <div className="relative">
           {/* Main Video */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/10">
             <video
               ref={videoRef}
               src={media[0].mediaUrl}
@@ -99,17 +101,17 @@ export default function HeroSection() {
           </div>
 
           {/* Floating Elements */}
-          <div className="absolute -top-4 -right-4 bg-white p-4 rounded-xl shadow-lg">
+          <div className="absolute -top-4 -right-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20">
             <div className="flex items-center gap-2">
-              <span className="text-yellow-500">★★★★★</span>
-              <span className="font-medium">5.0</span>
+              <span className="text-amber-400">★★★★★</span>
+              <span className="font-medium text-amber-100">5.0</span>
             </div>
           </div>
           
-          <div className="absolute -bottom-4 -left-4 bg-white p-4 rounded-xl shadow-lg">
+          <div className="absolute -bottom-4 -left-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20">
             <div className="flex items-center gap-2">
-              <span className="text-purple-500">📸</span>
-              <span className="font-medium">Premium Quality</span>
+              <span className="text-amber-400">📸</span>
+              <span className="font-medium text-amber-100">Premium Quality</span>
             </div>
           </div>
         </div>
