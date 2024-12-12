@@ -8,8 +8,6 @@ type MediaType = "video" | "photo";
 
 interface MediaItem {
   id: number;
-  title: string;
-  description: string;
   mediaUrl: string;
   type: MediaType;
 }
@@ -17,23 +15,17 @@ interface MediaItem {
 const media: MediaItem[] = [
   {
     id: 1,
-    title: "Amazing Video",
-    description: "Hover to play the video",
     mediaUrl: "https://utfs.io/f/XjzNbh0ZM35DhcrRGpN3cSU9yLPT0zXJjOslBnQempvh5tN7",
     type: "video"
   },
   {
     id: 2,
-    title: "Beautiful Photo 1",
-    description: "Hover to see the effect",
     mediaUrl: "https://utfs.io/f/XjzNbh0ZM35D2Hd0Za9Yc79zMD1onOvWGeuKYZ6I3kdUjX8L",
     type: "photo"
   },
   {
     id: 3,
-    title: "Beautiful Photo 2",
-    description: "Hover to see the effect",
-    mediaUrl: "https://utfs.io/f/XjzNbh0ZM35D2Hd0Za9Yc79zMD1onOvWGeuKYZ6I3kdUjX8L",
+    mediaUrl: "https://utfs.io/f/XjzNbh0ZM35D1UmjUv9TVh7fkRuxUr4saqOdKlvAgbIy3HZp",
     type: "photo"
   }
 ];
@@ -43,7 +35,7 @@ export default function FeaturedPortfolio() {
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement }>({});
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-amber-100">
+    <section className="bg-gradient-to-b from-white to-amber-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Hasil Photo dan Video</h2>

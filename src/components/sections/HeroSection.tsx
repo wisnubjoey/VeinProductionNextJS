@@ -1,9 +1,36 @@
+"use client"
+
 // src/components/sections/HeroSection.tsx
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Image from "next/image";
+import { useRef, useEffect } from "react";
+
+type MediaType = "video" | "photo";
+
+interface MediaItem {
+  id: number;
+  mediaUrl: string;
+  type: MediaType;
+}
+
+const media: MediaItem[] = [
+  {
+    id: 1,
+    mediaUrl: "https://utfs.io/f/XjzNbh0ZM35D1uXyU09TVh7fkRuxUr4saqOdKlvAgbIy3HZp",
+    type: "video" as MediaType
+  },
+];
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Auto-play video when component mounts
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, []);
+
   return (
     <div className="min-h-screen pt-24 flex items-center bg-gradient-to-b from-amber-100 to-white">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
@@ -56,16 +83,18 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right Image/Illustration */}
+        {/* Right Content */}
         <div className="relative">
-          {/* Main Image */}
+          {/* Main Video */}
           <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-            <Image
-              src="/images/Kevin.PNG" // Ganti dengan gambar Anda
-              alt="Photography Service"
-              fill
-              className="object-cover"
-              priority
+            <video
+              ref={videoRef}
+              src={media[0].mediaUrl}
+              className="absolute top-0 left-0 w-full h-full object-cover"
+              loop
+              muted
+              playsInline
+              autoPlay
             />
           </div>
 

@@ -10,8 +10,6 @@ import {
 
 interface MediaCardProps {
   id: string | number;
-  title: string;
-  description: string;
   mediaUrl: string;
   type: 'photo' | 'video';
   videoRef?: (el: HTMLVideoElement | null) => void;
@@ -20,8 +18,6 @@ interface MediaCardProps {
 }
 
 export function MediaCard({ 
-  title, 
-  description, 
   mediaUrl, 
   type,
   videoRef,
@@ -62,12 +58,7 @@ export function MediaCard({
 
             {/* Content */}
             <div className="text relative z-50">
-              <h1 className="font-bold text-2xl text-gray-50 relative mb-2">
-                {title}
-              </h1>
-              <p className="font-normal text-base text-gray-200 relative">
-                {description}
-              </p>
+              
             </div>
           </div>
         </div>
@@ -76,7 +67,7 @@ export function MediaCard({
       <ModalBody>
         <ModalContent>
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-center">{title}</h2>
+     
             
             {/* Media Display */}
             <div className="relative aspect-video rounded-lg overflow-hidden">
@@ -96,9 +87,7 @@ export function MediaCard({
             </div>
 
             {/* Description */}
-            <p className="text-gray-600 dark:text-gray-300 text-center">
-              {description}
-            </p>
+           
           </div>
         </ModalContent>
         <ModalFooter className="gap-4">
