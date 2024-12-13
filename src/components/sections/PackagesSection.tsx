@@ -59,7 +59,7 @@ export default function PackagesSection() {
 
   return (
     <BackgroundLines className="relative py-24">
-      <div className="relative max-w-7xl mx-auto px-6 z-10">
+      <div className="relative max-w-7xl mx-auto px-6 z-10" id="packages">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-amber-400 to-amber-500 text-transparent bg-clip-text">
             Choose Your Package

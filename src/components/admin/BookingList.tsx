@@ -35,77 +35,82 @@ export default function BookingList() {
     }
   });
 
-
-  if (isLoading) return <div>Loading...</div>;
-
-  console.log('Raw booking data:', bookings);
+  if (isLoading) return <div className="text-amber-400">Loading...</div>;
 
   return (
     <>
-    <Card>
-      <CardContent className="p-0">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Client Name</TableHead>
-              <TableHead>Event Date</TableHead>
-              <TableHead>Event Type</TableHead>
-              <TableHead>Package</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {bookings?.data?.map((booking: Booking) => (
-              <TableRow key={booking.id}>
-                <TableCell className="font-medium">
-                  {booking.client_name}
-                </TableCell>
-                <TableCell>{new Date(booking.event_date).toLocaleDateString()}</TableCell>
-                <TableCell>{booking.event_type}</TableCell>
-                <TableCell>{booking.package_type}</TableCell>
-                <TableCell>{booking.email}</TableCell>
-                <TableCell>
-                  <span className={`px-2 py-1 rounded-full text-sm ${
-                    booking.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
-                    booking.status === 'contacted' ? 'bg-blue-100 text-blue-800' :
-                    booking.status === 'confirmed' ? 'bg-green-100 text-green-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
-                    {booking.status}
-                  </span>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      setSelectedBooking(booking);
-                    }}
-                  >
-                    View Details
-                  </Button>
-                </TableCell>
+      <Card className="bg-black/40 border-amber-500/20">
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow className="border-amber-500/20">
+                <TableHead className="text-amber-400">Client Name</TableHead>
+                <TableHead className="text-amber-400">Event Date</TableHead>
+                <TableHead className="text-amber-400">Event Type</TableHead>
+                <TableHead className="text-amber-400">Package</TableHead>
+                <TableHead className="text-amber-400">Status</TableHead>
+                <TableHead className="text-amber-400">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
+            </TableHeader>
+            <TableBody>
+              {bookings?.data?.map((booking: Booking) => (
+                <TableRow 
+                  key={booking.id} 
+                  className="border-amber-500/20 hover:bg-black/40"
+                >
+                  <TableCell className="font-medium text-amber-100">
+                    {booking.client_name}
+                  </TableCell>
+                  <TableCell className="text-amber-500">
+                    {new Date(booking.event_date).toLocaleDateString()}
+                  </TableCell>
+                  <TableCell className="text-amber-200/80">
+                    {booking.event_type}
+                  </TableCell>
+                  <TableCell className="text-amber-200/80">
+                    {booking.package_type}
+                  </TableCell>
+                  <TableCell>
+                    <span className={`px-2 py-1 rounded-full text-sm ${
+                      booking.status === 'pending' ? 'bg-yellow-500/10 text-yellow-500' :
+                      booking.status === 'contacted' ? 'bg-blue-500/10 text-blue-500' :
+                      booking.status === 'confirmed' ? 'bg-green-500/10 text-green-500' :
+                      'bg-gray-500/10 text-gray-400'
+                    }`}>
+                      {booking.status}
+                    </span>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        setSelectedBooking(booking);
+                      }}
+                      className="border-amber-500/20 text-amber-400 hover:bg-black"
+                    >
+                      View Details
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
 
-    <BookingDetailModal 
-  booking={selectedBooking}
-  isOpen={!!selectedBooking}
-  onClose={() => setSelectedBooking(null)}
-  onUpdateStatus={(status) => {
-    if (selectedBooking) {
-      updateStatusMutation.mutate({
-        id: selectedBooking.id,
-        status
-      });
-    }
-  }}
-/>
+      <BookingDetailModal 
+        booking={selectedBooking}
+        isOpen={!!selectedBooking}
+        onClose={() => setSelectedBooking(null)}
+        onUpdateStatus={(status) => {
+          if (selectedBooking) {
+            updateStatusMutation.mutate({
+              id: selectedBooking.id,
+              status
+            });
+          }
+        }}
+      />
     </>
   );
 }

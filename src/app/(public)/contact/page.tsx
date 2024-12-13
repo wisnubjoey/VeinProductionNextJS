@@ -2,7 +2,7 @@
 
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
-import { Instagram, Mail, Phone } from "lucide-react";
+import { Instagram, Mail, } from "lucide-react";
 import Link from "next/link";
 
 const socialLinks = [

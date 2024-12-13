@@ -41,7 +41,7 @@ export default function BookingModal({ isOpen, onClose, packageType }: BookingMo
       setTimeout(() => {
         onClose();
         setSuccess(false);
-      }, 2000);
+      }, 5000);
 
     } catch (error) {
       console.error('Error creating booking:', error);
@@ -52,61 +52,110 @@ export default function BookingModal({ isOpen, onClose, packageType }: BookingMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md">
+      <DialogContent className="max-w-md bg-black/95 border border-amber-500/20">
         <DialogHeader>
-          <DialogTitle>Book Your Event</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-amber-400 to-amber-500 text-transparent bg-clip-text">
+            Book Your Event
+          </DialogTitle>
         </DialogHeader>
 
         {success ? (
-          <div className="py-8 text-center">
-            <p className="text-green-600 font-medium">Booking submitted successfully!</p>
-            <p className="text-sm text-gray-500 mt-2">We&apos;ll contact you soon.</p>
+          <div className="py-12 text-center space-y-4">
+            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-r from-amber-400 to-amber-500 flex items-center justify-center">
+              <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <p className="text-amber-400 font-medium text-xl">Booking submitted successfully!</p>
+            <p className="text-amber-200/80">We&apos;ll contact you soon.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Label>Full Name</Label>
-              <Input name="name" required />
-            </div>
-
-            <div>
-              <Label>Email</Label>
-              <Input type="email" name="email" required />
-            </div>
-
-            <div>
-              <Label>Phone</Label>
-              <Input type="tel" name="phone" required />
-            </div>
-
-            <div>
-              <Label>Event Date</Label>
-              <Input type="date" name="event_date" required />
-            </div>
-
-            <div>
-              <Label>Event Type</Label>
-              <Input name="event_type" placeholder="Wedding, Birthday, etc." required />
-            </div>
-
-            <div>
-              <Label>Location</Label>
-              <Input name="location" required />
-            </div>
-
-            <div>
-              <Label>Special Requests (Optional)</Label>
-              <textarea 
-                name="special_requests"
-                className="w-full p-2 border rounded-md min-h-[100px]"
+              <Label className="text-amber-200">Full Name</Label>
+              <Input 
+                name="name" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100 placeholder:text-amber-200/30"
+                placeholder="Enter your full name"
               />
             </div>
 
-            <div className="flex justify-end gap-2">
-              <Button type="button" variant="outline" onClick={onClose}>
+            <div>
+              <Label className="text-amber-200">Email</Label>
+              <Input 
+                type="email" 
+                name="email" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100 placeholder:text-amber-200/30"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <Label className="text-amber-200">Phone</Label>
+              <Input 
+                type="tel" 
+                name="phone" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100 placeholder:text-amber-200/30"
+                placeholder="+62 xxx xxxx xxxx"
+              />
+            </div>
+
+            <div>
+              <Label className="text-amber-200">Event Date</Label>
+              <Input 
+                type="date" 
+                name="event_date" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100"
+              />
+            </div>
+
+            <div>
+              <Label className="text-amber-200">Event Type</Label>
+              <Input 
+                name="event_type" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100 placeholder:text-amber-200/30"
+                placeholder="Wedding, Birthday, etc."
+              />
+            </div>
+
+            <div>
+              <Label className="text-amber-200">Location</Label>
+              <Input 
+                name="location" 
+                required 
+                className="bg-black/40 border-amber-500/20 focus:border-amber-500/40 text-amber-100 placeholder:text-amber-200/30"
+                placeholder="Event location"
+              />
+            </div>
+
+            <div>
+              <Label className="text-amber-200">Special Requests (Optional)</Label>
+              <textarea 
+                name="special_requests"
+                className="w-full p-3 bg-black/40 border border-amber-500/20 focus:border-amber-500/40 rounded-md min-h-[100px] text-amber-100 placeholder:text-amber-200/30 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                placeholder="Any special requests or additional information..."
+              />
+            </div>
+
+            <div className="flex justify-end gap-2 pt-4">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={onClose}
+                className="border-amber-500/20 hover:bg-gray-400 text-black"
+              >
                 Cancel
               </Button>
-              <Button type="submit" disabled={loading}>
+              <Button 
+                type="submit" 
+                disabled={loading}
+                className="bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black font-medium"
+              >
                 {loading ? 'Submitting...' : 'Submit Booking'}
               </Button>
             </div>

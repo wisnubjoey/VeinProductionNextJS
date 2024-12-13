@@ -4,6 +4,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 
 type MediaType = "video" | "photo";
 
@@ -24,6 +25,14 @@ const media: MediaItem[] = [
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const scrollToPackages = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const packagesSection = document.querySelector('#packages');
+    if (packagesSection) {
+      packagesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     // Auto-play video when component mounts
     if (videoRef.current) {
@@ -36,32 +45,52 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="space-y-8">
-          <div className="inline-block px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block px-4 py-2 bg-amber-500/10 rounded-full border border-amber-500/20"
+          >
             <span className="text-amber-400 font-medium">Premium Photography Services</span>
-          </div>
+          </motion.div>
           
-          <h1 className="text-5xl md:text-6xl font-bold leading-tight text-amber-100">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-5xl md:text-6xl font-bold leading-tight text-amber-100"
+          >
             Capture Your{" "}
             <span className="bg-gradient-to-r from-amber-400 to-amber-500 text-transparent bg-clip-text">
               Special Moments
             </span>{" "}
             Forever
-          </h1>
+          </motion.h1>
           
-          <p className="text-xl text-amber-200/80 max-w-lg">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-xl text-amber-200/80 max-w-lg"
+          >
             Professional photography and videography services in Bali. 
             Let us help you create timeless memories with our expert team.
-          </p>
+          </motion.p>
           
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <Link href="/booking">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="flex flex-col sm:flex-row items-center gap-4"
+          >
+            <a href="#packages" onClick={scrollToPackages}>
               <Button 
                 size="lg" 
                 className="w-full sm:w-auto bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-black text-lg px-8 transition-all duration-300"
               >
                 Book Now
               </Button>
-            </Link>
+            </a>
             <Link href="/portfolio">
               <Button 
                 size="lg" 
@@ -70,10 +99,15 @@ export default function HeroSection() {
                 View Portfolio
               </Button>
             </Link>
-          </div>
+          </motion.div>
 
           {/* Social Proof */}
-          <div className="pt-8 flex items-center gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="pt-8 flex items-center gap-8"
+          >
             <div>
               <h4 className="text-3xl font-bold text-amber-100">100+</h4>
               <p className="text-amber-200/80">Happy Clients</p>
@@ -82,13 +116,18 @@ export default function HeroSection() {
               <h4 className="text-3xl font-bold text-amber-100">5.0</h4>
               <p className="text-amber-200/80">Rating</p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Content */}
-        <div className="relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="relative"
+        >
           {/* Main Video */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/10">
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/30">
             <video
               ref={videoRef}
               src={media[0].mediaUrl}
@@ -101,20 +140,30 @@ export default function HeroSection() {
           </div>
 
           {/* Floating Elements */}
-          <div className="absolute -top-4 -right-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="absolute -top-4 -right-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20"
+          >
             <div className="flex items-center gap-2">
               <span className="text-amber-400">★★★★★</span>
               <span className="font-medium text-amber-100">5.0</span>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="absolute -bottom-4 -left-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 1.1 }}
+            className="absolute -bottom-4 -left-4 bg-black/80 backdrop-blur-sm p-4 rounded-xl border border-amber-500/20"
+          >
             <div className="flex items-center gap-2">
               <span className="text-amber-400">📸</span>
               <span className="font-medium text-amber-100">Premium Quality</span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
