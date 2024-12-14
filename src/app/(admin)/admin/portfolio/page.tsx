@@ -32,7 +32,7 @@ export default function PortfolioPage() {
   const [selectedType, setSelectedType] = useState('all');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
 
-  const { data: portfolioItems, isLoading, error } = useQuery({
+  const { data: portfolioItems, error } = useQuery({
     queryKey: ['portfolio'],
     queryFn: getPortfolioItems
   });
@@ -47,8 +47,6 @@ export default function PortfolioPage() {
   const filteredItems = selectedType === 'all' 
     ? portfolioItems?.data
     : portfolioItems?.data?.filter(item => item.type === selectedType);
-
-  if (isLoading) return <div className="text-amber-400">Loading...</div>;
 
   if (error) return <div className="text-red-400">Error loading portfolio items</div>;
   

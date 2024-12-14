@@ -96,14 +96,7 @@ export function MediaCard({
                 </div>
 
                 {/* Description */}
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-amber-400">
-                    Media Details
-                  </h3>
-                  <p className="text-amber-200/80">
-                    Click the buttons below to share or download this media.
-                  </p>
-                </div>
+                
               </div>
 
               <ModalFooter className="flex justify-end gap-4 pt-6 border-t border-amber-500/20">

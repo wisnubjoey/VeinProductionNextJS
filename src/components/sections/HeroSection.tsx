@@ -109,12 +109,12 @@ export default function HeroSection() {
             className="pt-8 flex items-center gap-8"
           >
             <div>
-              <h4 className="text-3xl font-bold text-amber-100">100+</h4>
-              <p className="text-amber-200/80">Happy Clients</p>
+              <h4 className="text-3xl font-bold text-amber-100">50+</h4>
+              <p className="text-amber-200/80">Clients</p>
             </div>
             <div>
-              <h4 className="text-3xl font-bold text-amber-100">5.0</h4>
-              <p className="text-amber-200/80">Rating</p>
+              <h4 className="text-3xl font-bold text-amber-100">86</h4>
+              <p className="text-amber-200/80">Projects</p>
             </div>
           </motion.div>
         </div>
@@ -160,7 +160,7 @@ export default function HeroSection() {
           >
             <div className="flex items-center gap-2">
               <span className="text-amber-400">📸</span>
-              <span className="font-medium text-amber-100">Premium Quality</span>
+              <span className="font-medium text-amber-100">Kevin Zaidan</span>
             </div>
           </motion.div>
         </motion.div>

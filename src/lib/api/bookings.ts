@@ -29,3 +29,12 @@ export async function createBooking(booking: Booking) {
   return response.data;
 }
 
+export async function getBookingStats() {
+  const response = await api.get('/bookings/stats');
+  return response.data;
+}
+
+export async function getRecentBookings() {
+  const response = await api.get('/bookings/recent');
+  return response.data;
+}
