@@ -1,9 +1,9 @@
 // src/lib/api/portfolio.ts
 import api from './axios';
-import { PortfolioItem, PortfolioData } from '@/types/portfolio';
+import { PortfolioItem, PortfolioData, PaginatedResponse } from '@/types/portfolio';
 
-export async function getPortfolioItems() {
-  const response = await api.get<PortfolioItem[]>('/portfolio');
+export async function getPortfolioItems(): Promise<PaginatedResponse<PortfolioItem>> {
+  const response = await api.get('/portfolio');
   return response.data;
 }
 

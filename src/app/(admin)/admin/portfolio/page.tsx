@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PlusCircle, Image, Film, Pencil, Trash2 } from "lucide-react";
+import { PlusCircle, Image as ImageIcon, Film, Pencil, Trash2 } from "lucide-react";
 import AddPortfolioModal from "@/components/admin/AddPortfolioModal";
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getPortfolioItems, deletePortfolioItem } from '@/lib/api/portfolio';
-import { PortfolioItem } from "@/types/portfolio";
+import { PaginatedResponse, PortfolioItem } from "@/types/portfolio";
 import { motion } from 'framer-motion';
 import AdminLayout from '../Layout';
+import Image from 'next/image';
 
 const container = {
   hidden: { opacity: 0 },
@@ -32,7 +33,7 @@ export default function PortfolioPage() {
   const [selectedType, setSelectedType] = useState('all');
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
 
-  const { data: portfolioItems, error } = useQuery({
+  const { data: portfolioItems, error } = useQuery<PaginatedResponse<PortfolioItem>>({
     queryKey: ['portfolio'],
     queryFn: getPortfolioItems
   });
@@ -94,11 +95,15 @@ export default function PortfolioPage() {
                 <CardContent className="p-0">
                   <div className="relative aspect-[4/3]">
                     {item.type === 'photo' ? (
-                      <img
-                        src={item.media_url}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={item.media_url}
+                          alt={item.title || 'Portfolio image'}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      </div>
                     ) : (
                       <video
                         src={item.media_url}
@@ -136,7 +141,7 @@ export default function PortfolioPage() {
 
                     <div className="absolute top-2 right-2">
                       {item.type === 'photo' ? (
-                        <Image className="h-5 w-5 text-white" />
+                        <ImageIcon className="h-5 w-5 text-white" />
                       ) : (
                         <Film className="h-5 w-5 text-white" />
                       )}
